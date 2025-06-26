@@ -14,8 +14,6 @@ public class Onibus {
     private Integer capacidade;
     private String numeroMotor;
 
-    // Getters e Setters
-
     public Long getId() {
         return id;
     }

@@ -11,6 +11,7 @@ public class Usuario {
 
     private String nome;
     private String email;
+    @Column(nullable = false)
     private String senha;
 
 

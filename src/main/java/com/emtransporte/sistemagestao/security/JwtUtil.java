@@ -8,8 +8,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private String secret = "chaveSecreta"; // Ideal: colocar no application.properties
-    private long expiration = 86400000; // 1 dia em milissegundos
+    private String secret = "chaveSecreta"; // botar no application.properties
+    private long expiration = 86400000;
 
     public String generateToken(String username) {
         return Jwts.builder()

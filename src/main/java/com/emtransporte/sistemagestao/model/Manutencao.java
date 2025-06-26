@@ -22,7 +22,6 @@ public class Manutencao {
     @JoinColumn(name = "onibus_id")
     private Onibus onibus;
 
-    // Getters e Setters
 
     public Long getId() {
         return id;

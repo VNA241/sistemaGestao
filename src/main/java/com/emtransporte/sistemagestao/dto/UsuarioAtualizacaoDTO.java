@@ -1,26 +1,9 @@
-package com.emtransporte.sistemagestao.model;
+package com.emtransporte.sistemagestao.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
-@Entity
-public class Usuario {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NotBlank
+public class UsuarioAtualizacaoDTO {
     private String nome;
-    @NotBlank
     private String email;
-    @NotBlank
-    @Column(nullable = false)
     private String senha;
-
-
-    public Long getId() {
-        return id;
-    }
 
     public String getNome() {
         return nome;

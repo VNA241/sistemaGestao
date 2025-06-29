@@ -1,5 +1,6 @@
 package com.emtransporte.sistemagestao.service;
 
+import com.emtransporte.sistemagestao.dto.UsuarioAtualizacaoDTO;
 import com.emtransporte.sistemagestao.model.Usuario;
 import com.emtransporte.sistemagestao.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,18 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario atualizarUsuario(Long id, Usuario usuarioAtualizado) {
-        return usuarioRepository.findById(id).map(usuarioExistente -> {
-            usuarioExistente.setNome(usuarioAtualizado.getNome());
-            usuarioExistente.setEmail(usuarioAtualizado.getEmail());
-
-            usuarioExistente.setSenha(passwordEncoder.encode(usuarioAtualizado.getSenha()));
-
-            return usuarioRepository.save(usuarioExistente);
+    public Usuario atualizarUsuario(Long id, UsuarioAtualizacaoDTO dto) {
+        return usuarioRepository.findById(id).map(usuario -> {
+            if (dto.getNome() != null) {
+                usuario.setNome(dto.getNome());
+            }
+            if (dto.getEmail() != null) {
+                usuario.setEmail(dto.getEmail());
+            }
+            if (dto.getSenha() != null) {
+                usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
+            }
+            return usuarioRepository.save(usuario);
         }).orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
     }
 

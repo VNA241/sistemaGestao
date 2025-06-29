@@ -1,8 +1,11 @@
 package com.emtransporte.sistemagestao.controller;
 
+import com.emtransporte.sistemagestao.dto.UsuarioAtualizacaoDTO;
 import com.emtransporte.sistemagestao.model.Usuario;
 import com.emtransporte.sistemagestao.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,22 +18,28 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public List<Usuario> listarUsuarios() {
+    public List<Usuario> listarTodos() {
         return usuarioService.listarTodos();
     }
 
     @PostMapping
-    public Usuario adicionarUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.adicionarUsuario(usuario);
+    public ResponseEntity<Usuario> adicionarUsuario(@RequestBody @Valid Usuario usuario) {
+        Usuario novoUsuario = usuarioService.adicionarUsuario(usuario);
+        return ResponseEntity.ok(novoUsuario);
     }
 
     @PutMapping("/{id}")
-    public Usuario atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        return usuarioService.atualizarUsuario(id, usuario);
+    public ResponseEntity<Usuario> atualizarUsuario(
+            @PathVariable Long id,
+            @RequestBody UsuarioAtualizacaoDTO dto) {
+
+        Usuario atualizado = usuarioService.atualizarUsuario(id, dto);
+        return ResponseEntity.ok(atualizado);
     }
 
     @DeleteMapping("/{id}")
-    public void deletarUsuario(@PathVariable Long id) {
+    public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
         usuarioService.deletarUsuario(id);
+        return ResponseEntity.noContent().build();
     }
 }

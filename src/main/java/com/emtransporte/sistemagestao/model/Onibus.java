@@ -1,6 +1,9 @@
 package com.emtransporte.sistemagestao.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Onibus {
@@ -13,6 +16,7 @@ public class Onibus {
     private String modelo;
     private Integer capacidade;
     private String numeroMotor;
+    private Integer quilometragem;
 
     public Long getId() {
         return id;
@@ -48,5 +52,13 @@ public class Onibus {
 
     public void setNumeroMotor(String numeroMotor) {
         this.numeroMotor = numeroMotor;
+    }
+
+    public Integer getQuilometragem() {
+        return quilometragem;
+    }
+
+    public void setQuilometragem(Integer quilometragem) {
+        this.quilometragem = quilometragem;
     }
 }

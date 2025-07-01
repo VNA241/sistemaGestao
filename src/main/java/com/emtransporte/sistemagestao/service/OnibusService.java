@@ -1,7 +1,10 @@
 package com.emtransporte.sistemagestao.service;
 
-import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
 import com.emtransporte.sistemagestao.model.Onibus;
 import com.emtransporte.sistemagestao.repository.OnibusRepository;
@@ -25,5 +28,29 @@ public class OnibusService {
 
     public void deletar(Long id) {
         onibusRepository.deleteById(id);
+    }
+
+    public Onibus atualizar(Long id, Onibus onibusAtualizado) {
+        Optional<Onibus> onibusExistenteOptional = onibusRepository.findById(id);
+
+        if (onibusExistenteOptional.isPresent()) {
+            Onibus onibusExistente = onibusExistenteOptional.get();
+            BeanUtils.copyProperties(onibusAtualizado, onibusExistente, "id");
+            return onibusRepository.save(onibusExistente);
+        } else {
+            return null; 
+        }
+    }
+
+    public Onibus registrarQuilometragem(Long id, Integer novaQuilometragem) {
+        Optional<Onibus> onibusExistenteOptional = onibusRepository.findById(id);
+
+        if (onibusExistenteOptional.isPresent()) {
+            Onibus onibusExistente = onibusExistenteOptional.get();
+            onibusExistente.setQuilometragem(novaQuilometragem);
+            return onibusRepository.save(onibusExistente);
+        } else {
+            return null; 
+        }
     }
 }

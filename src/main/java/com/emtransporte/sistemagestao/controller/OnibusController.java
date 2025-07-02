@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emtransporte.sistemagestao.model.Onibus;
-import com.emtransporte.sistemagestao.model.Abastecimento;
-import com.emtransporte.sistemagestao.service.AbastecimentoService;
 import com.emtransporte.sistemagestao.service.OnibusService;
 
 @RestController
@@ -21,11 +19,9 @@ import com.emtransporte.sistemagestao.service.OnibusService;
 public class OnibusController {
 
     private final OnibusService onibusService;
-    private final AbastecimentoService abastecimentoService;
 
-    public OnibusController(OnibusService onibusService, AbastecimentoService abastecimentoService) {
+    public OnibusController(OnibusService onibusService) {
         this.onibusService = onibusService;
-        this.abastecimentoService = abastecimentoService;
     }
 
     @GetMapping
@@ -45,16 +41,13 @@ public class OnibusController {
 
     @PutMapping("/{id}")
     public Onibus atualizar(@PathVariable Long id, @RequestBody Onibus onibusAtualizado) {
-    return onibusService.atualizar(id, onibusAtualizado);
+        return onibusService.atualizar(id, onibusAtualizado);
     }
 
     @PutMapping("/{id}/quilometragem")
     public Onibus registrarQuilometragem(@PathVariable Long id, @RequestBody Integer novaQuilometragem) {
-    return onibusService.registrarQuilometragem(id, novaQuilometragem);
+        return onibusService.registrarQuilometragem(id, novaQuilometragem);
     }
 
-    @PostMapping("/{id}/abastecimentos")
-    public Abastecimento registrarAbastecimento(@PathVariable Long id, @RequestBody Abastecimento novoAbastecimento) {
-        return abastecimentoService.salvar(id, novoAbastecimento);
-    }
 }
+

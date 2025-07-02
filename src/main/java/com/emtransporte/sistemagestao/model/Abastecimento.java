@@ -22,7 +22,7 @@ public class Abastecimento {
 
     private Date data;
     private Double litros;
-    private Double valor;
+    private Double custo;
 
     public Abastecimento() { 
     }
@@ -51,11 +51,12 @@ public class Abastecimento {
     public void setLitros(Double litros) {
         this.litros = litros;
     }
-    public Double getValor() {
-        return valor;
+
+    public Double getCusto() {
+        return custo;
     }
-    public void setValor(Double valor) {
-        this.valor = valor;
+
+    public void setCusto(Double custo) {
+        this.custo = custo;
     }
 }
-

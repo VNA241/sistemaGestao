@@ -57,4 +57,17 @@ public class AbastecimentoService {
     public List<Abastecimento> buscarPorOnibusData(Long idOnibus, Date data) {
         return abastecimentoRepository.findByOnibusIdAndData(idOnibus, data); 
     }
+
+    
+    public Abastecimento atualizar(Long id, Abastecimento abastecimentoAtualizado) {
+        Abastecimento abastecimento = buscarPorId(id);
+        if (abastecimento != null) {
+            abastecimento.setData(abastecimentoAtualizado.getData());
+            abastecimento.setLitros(abastecimentoAtualizado.getLitros());
+            abastecimento.setCusto(abastecimentoAtualizado.getCusto());
+            return abastecimentoRepository.save(abastecimento);
+        } else {
+            return null; 
+        }
+    }
 }
